@@ -14,7 +14,7 @@ from gnuradio import qtgui
 import os
 import sys
 import logging as log
-import dvbs2_rx_epy_block_0 as epy_block_0  # embedded python block
+# import dvbs2_rx_epy_block_0 as epy_block_0  # embedded python block
 import threading
 
 def get_state_directory() -> str:
@@ -89,7 +89,7 @@ class dvbs2_rx(gr.top_block, Qt.QWidget):
         self.top_layout = Qt.QVBoxLayout(self.top_widget)
         self.top_grid_layout = Qt.QGridLayout()
         self.top_layout.addLayout(self.top_grid_layout)
-        self.epy_block_0 = epy_block_0.blk()        
+#        self.epy_block_0 = epy_block_0.blk()        
 
         self.settings = Qt.QSettings("gnuradio/flowgraphs", "dvbs2_rx")
 
@@ -255,13 +255,13 @@ class dvbs2_rx(gr.top_block, Qt.QWidget):
                      (self.qtgui_const_sink_x_0_0, 0))
 
         # TS 出力 → epy_block_0 → UDP Sink
-        self.connect((self.dvbs2rx_rx_hier_0, 0),
-                     (self.epy_block_0, 0))             # self.dvbs2rx_rx_hier_0 -> self.epy_block_0 -> self.network_udp_sink
-
-        self.connect((self.epy_block_0, 0),
-                     (self.network_udp_sink_0, 0))
 #        self.connect((self.dvbs2rx_rx_hier_0, 0),
-#                     (self.network_udp_sink_0, 0))       # self.dvbs2rx_rx_hier_0 -> self.network_udp_sink
+#                     (self.epy_block_0, 0))             # self.dvbs2rx_rx_hier_0 -> self.epy_block_0 -> self.network_udp_sink
+#
+#        self.connect((self.epy_block_0, 0),
+#                     (self.network_udp_sink_0, 0))
+        self.connect((self.dvbs2rx_rx_hier_0, 0),
+                     (self.network_udp_sink_0, 0))       # self.dvbs2rx_rx_hier_0 -> self.network_udp_sink
 
 
     def closeEvent(self, event):
